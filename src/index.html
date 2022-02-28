@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Application Caisse</title>
+</head>
+<body>
+<!-- <main class="container"> -->
+    <header>
+        <form id="transaction-form">
+            <div class="field">
+                <label for="">Type:</label>
+                <select name="" id="type">
+                    <option value="debit">Débit</option>
+                    <option value="credit">Crédit</option>
+                </select>
+            </div>
+            <div class="field">
+                <label for="">Montant (TND):</label>
+                <input type="number" name="" id="amount">
+            </div>
+            <div class="field">
+                <label for="">Qui:</label>
+                <input type="text" name="" id="who">
+            </div>
+            <div class="field">
+                <label for="">Raison:</label>
+                <input type="text" name="" id="reason">
+            </div>
+            <button type="submit">Ajouter</button>
+        </form>
+    </header>
+    <div class="wrapper">
+        <h1>Solde</h1>
+        <h2 id="solde-view"></h2>
+        
+    </div>
+    <div class="wrapper">
+        <h1>Liste Des Transactions</h1>
+        
+        <!-- Liste de transaction -->
+        <ul id="transaction-list">
+        
+        </ul>
+    </div>
+
+    <script type="module" src="app.ts"></script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+body{
+    margin: 0;
+    font-family: Roboto;
+}
+.wrapper{
+    max-width: 960px;
+    margin: 0 auto;
+}
+h1{
+    margin: 40px auto;
+    color: #ff0aa7;
+    text-align: center;
+}
+ul{
+    padding: 0;
+    list-style-type: none;
+}
+li{
+    padding: 6px 10px;
+    border: 1px solid #fff;
+    margin: 10px auto;
+}
+li.credit{
+    background-color: rgb(172, 228, 150);
+}
+li.debit{
+    background-color: rgb(252, 118, 118);
+}
+li h4.credit{
+    color: #197e0b;
+    margin: 0;
+    text-transform: capitalize;
+}
+li h4.debit{
+    color: #e20c02;
+    margin: 0;
+    text-transform: capitalize;
+}
+li.P{
+    color: #333;
+    margin: 8px 0 0;
+}
+header{
+    background: #eee;
+    padding: 60px;
+    margin-top: 60px;
+}
+form{
+    max-width: 960px;
+    margin: 0;
+    text-align: center;
+}
+label{
+    display: block;
+    font-weight: bold;
+    font-size: 0.8em;
+    color: #333;
+    margin: 16px 0 6px;
+}
+input, select{
+    padding: 6px;
+    border: 1px solid #e1e1e1;
+    border-radius: 4px;
+}
+.field{
+    display: inline-block;
+    margin: 0 10px;
+}
+button{
+    color: white;
+    border: 0;
+    background: #0a1aff;
+    padding: 6px;
+    min-width: 80px;
+    border-radius: 4px;
+}
+
+/*# sourceMappingURL=/style.e308ff8e.css.map */
