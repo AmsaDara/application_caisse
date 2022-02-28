@@ -4,10 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">   
     <title>Application Caisse</title>
 </head>
 <body>
+
+
+
 <!-- <main class="container"> -->
     <header>
         <form id="transaction-form">
@@ -33,20 +36,51 @@
             <button type="submit">Ajouter</button>
         </form>
     </header>
+    
+    <!-- Valeur Du Solde -->
     <div class="wrapper">
         <h1>Solde</h1>
         <h2 id="solde-view"></h2>
         
     </div>
+    
+    <!-- Nombre de transaction -->
+    <div class="wrapper">
+        <h1>Nombre De Transactions</h1>
+        <table >
+            <tr>
+                <td>Crédit</td>
+                <td>Débit</td>
+            </tr>
+            <tr>
+                <td id="credit-compte"></td>
+                <td id="debit-compte"></td>
+            </tr>
+            
+        </table>
+    </div> 
+    
+    <!-- Répartition des transactions par personne -->
+    <div class="wrapper">
+        <h1>Répartition des transactions par personne</h1>
+        <table id="transactions-par-user">
+            <tr>
+                <td>Personnel</td>
+                <td>Crédit</td>
+                <td>Débit</td>
+            </tr>
+        </table>
+    </div>
+     
+    <!-- Liste de transaction -->
     <div class="wrapper">
         <h1>Liste Des Transactions</h1>
         
-        <!-- Liste de transaction -->
         <ul id="transaction-list">
         
         </ul>
     </div>
-
+    
     <script type="module" src="app.ts"></script>
 </body>
 </html>

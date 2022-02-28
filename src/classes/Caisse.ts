@@ -4,14 +4,12 @@ import { Transaction } from "./Transaction";
 
 
 export class Caisse implements ISubject{
-    private solde : number;
+    private solde : number = 0;
     private transactions : any[] = [];
     
     private observers : IObserver[] = [];
     
-    constructor(_solde:number){
-        this.solde = _solde;
-    }
+    
     subscribeObserver(obs: IObserver): void {
         this.observers.push(obs)
         obs.getNotification(this)

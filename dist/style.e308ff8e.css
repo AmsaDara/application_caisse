@@ -74,5 +74,18 @@ button{
     min-width: 80px;
     border-radius: 4px;
 }
+table{
+    border: 1px solid black;
+}
+table tr, table td{
+    text-align: center;
+    padding: 7px;
+    font-weight: 600;
+    border: 1px solid #ff0aa7;
+}
+table thead tr {
+    border-bottom: 1px solid grey;
+}
+
 
 /*# sourceMappingURL=/style.e308ff8e.css.map */

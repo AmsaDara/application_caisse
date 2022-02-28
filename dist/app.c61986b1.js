@@ -128,10 +128,10 @@ exports.Caisse = void 0;
 var Caisse =
 /** @class */
 function () {
-  function Caisse(_solde) {
+  function Caisse() {
+    this.solde = 0;
     this.transactions = [];
     this.observers = [];
-    this.solde = _solde;
   }
 
   Caisse.prototype.subscribeObserver = function (obs) {
@@ -244,6 +244,45 @@ function () {
 }();
 
 exports.Transaction = Transaction;
+},{}],"classes/TransactionCompte.ts":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.TransationCompte = void 0;
+
+var TransationCompte =
+/** @class */
+function () {
+  function TransationCompte() {
+    this.htmlDebitCompteView = document.querySelector("#debit-compte");
+    this.htmlCreditCompteView = document.querySelector("#credit-compte");
+  }
+
+  TransationCompte.prototype.getNotification = function (caisse) {
+    var transactionArray = caisse.getTransactions();
+    var DC = 0;
+    var CC = 0;
+
+    for (var _i = 0, transactionArray_1 = transactionArray; _i < transactionArray_1.length; _i++) {
+      var tr = transactionArray_1[_i];
+
+      if (tr.getType() === 'debit') {
+        DC++;
+      } else {
+        CC++;
+      }
+    }
+
+    this.htmlDebitCompteView.innerText = DC.toString();
+    this.htmlCreditCompteView.innerText = CC.toString();
+  };
+
+  return TransationCompte;
+}();
+
+exports.TransationCompte = TransationCompte;
 },{}],"classes/TransactionList.ts":[function(require,module,exports) {
 "use strict";
 
@@ -281,6 +320,78 @@ function () {
 }();
 
 exports.TransactionList = TransactionList;
+},{}],"classes/transactionParUserView.ts":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.TransactionParUser = void 0;
+
+var TransactionParUser =
+/** @class */
+function () {
+  function TransactionParUser() {
+    this.htmlContainer = document.querySelector("#transactions-par-user");
+  }
+
+  TransactionParUser.prototype.getNotification = function (caisse) {
+    var transactions = caisse.getTransactions();
+    var result = [];
+
+    var _loop_1 = function _loop_1(tr) {
+      var nb = result.filter(function (e) {
+        return e.name === tr.getByWhome();
+      }).length;
+
+      if (nb === 0) {
+        var user = {
+          name: tr.getByWhome(),
+          debit: tr.getType() === "debit" ? tr.getAmount() : 0,
+          credit: tr.getType() === "credit" ? tr.getAmount() : 0
+        };
+        result.push(user);
+      } else {
+        var idx = result.findIndex(function (elm) {
+          return elm.name === tr.getByWhome();
+        });
+
+        if (tr.getType() === 'debit') {
+          result[idx].debit += tr.getAmount();
+        } else {
+          result[idx].credit += tr.getAmount();
+        }
+      }
+    };
+
+    for (var _i = 0, transactions_1 = transactions; _i < transactions_1.length; _i++) {
+      var tr = transactions_1[_i];
+
+      _loop_1(tr);
+    }
+
+    this.htmlContainer.innerHTML = "<tr>\n                                            <td>Personnel</td>\n                                            <td>Cr\xE9dit</td>\n                                            <td>D\xE9bit</td>\n                                        </tr>";
+
+    for (var _a = 0, result_1 = result; _a < result_1.length; _a++) {
+      var res = result_1[_a];
+      var nameTd = document.createElement('td');
+      var creditTd = document.createElement('td');
+      var debitTd = document.createElement('td');
+      nameTd.innerText = res.name;
+      debitTd.innerText = res.debit.toString();
+      creditTd.innerText = res.credit.toString();
+      var tr = document.createElement('tr');
+      tr.append(nameTd);
+      tr.append(creditTd);
+      tr.append(debitTd);
+      this.htmlContainer.append(tr);
+    }
+  };
+
+  return TransactionParUser;
+}();
+
+exports.TransactionParUser = TransactionParUser;
 },{}],"app.ts":[function(require,module,exports) {
 "use strict";
 
@@ -294,13 +405,21 @@ var SoldeView_1 = require("./classes/SoldeView");
 
 var Transaction_1 = require("./classes/Transaction");
 
+var TransactionCompte_1 = require("./classes/TransactionCompte");
+
 var TransactionList_1 = require("./classes/TransactionList");
 
-var caisse = new Caisse_1.Caisse(10000);
+var transactionParUserView_1 = require("./classes/transactionParUserView");
+
+var caisse = new Caisse_1.Caisse();
 var soldeView = new SoldeView_1.SoldeView();
 caisse.subscribeObserver(soldeView);
-var TransactionListView = new TransactionList_1.TransactionList();
-caisse.subscribeObserver(TransactionListView);
+var transactionListView = new TransactionList_1.TransactionList();
+caisse.subscribeObserver(transactionListView);
+var transationCompte = new TransactionCompte_1.TransationCompte();
+caisse.subscribeObserver(transationCompte);
+var transactionParUser = new transactionParUserView_1.TransactionParUser();
+caisse.subscribeObserver(transactionParUser);
 var transactionForm = document.querySelector('#transaction-form');
 transactionForm.addEventListener("submit", function (e) {
   e.preventDefault();
@@ -323,7 +442,7 @@ transactionForm.addEventListener("submit", function (e) {
 //     const li = document.createElement("li");
 //     li.className
 // })
-},{"./classes/Caisse":"classes/Caisse.ts","./classes/SoldeView":"classes/SoldeView.ts","./classes/Transaction":"classes/Transaction.ts","./classes/TransactionList":"classes/TransactionList.ts"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./classes/Caisse":"classes/Caisse.ts","./classes/SoldeView":"classes/SoldeView.ts","./classes/Transaction":"classes/Transaction.ts","./classes/TransactionCompte":"classes/TransactionCompte.ts","./classes/TransactionList":"classes/TransactionList.ts","./classes/transactionParUserView":"classes/transactionParUserView.ts"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -351,7 +470,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57049" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50218" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

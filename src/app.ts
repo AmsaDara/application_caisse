@@ -1,15 +1,23 @@
 import { Caisse } from "./classes/Caisse";
 import { SoldeView } from "./classes/SoldeView";
 import { Transaction } from "./classes/Transaction";
+import { TransationCompte } from "./classes/TransactionCompte";
 import { TransactionList } from "./classes/TransactionList";
+import { TransactionParUser } from "./classes/transactionParUserView";
 
-let caisse = new Caisse(10000);
+let caisse = new Caisse();
 
 let soldeView = new SoldeView();
 caisse.subscribeObserver(soldeView)
 
-let TransactionListView = new TransactionList();
-caisse.subscribeObserver(TransactionListView)
+let transactionListView = new TransactionList();
+caisse.subscribeObserver(transactionListView)
+
+let transationCompte = new TransationCompte();
+caisse.subscribeObserver(transationCompte)
+
+let transactionParUser = new TransactionParUser();
+caisse.subscribeObserver(transactionParUser)
 
 const transactionForm = document.querySelector('#transaction-form')! as HTMLFormElement
 
